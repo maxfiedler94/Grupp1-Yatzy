@@ -19,7 +19,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import AppPackage.AnimationClass;
 import java.awt.event.MouseAdapter;
-
+/**
+ * Yatzy class contains the startscreen
+ * Tutorial, source: https://www.youtube.com/watch?v=QA8V80WiZ6I
+ */
 
 public class Yatzy
 {
@@ -35,14 +38,7 @@ public class Yatzy
 	private JTextField EnterPlayer42;
 	private JTextField EnterPlayer43;
 	private JTextField EnterPlayer44;
-	
     private String[] players;
-    
-
-	/**
-	 * Launch the application.
-	 */
-	
     private JPanel panel;
 	JButton btn3PlayerButton = new JButton("");
 	JButton btn4PlayerButton = new JButton("");
@@ -53,7 +49,11 @@ public class Yatzy
 	private JPanel panelGame;
 	
 	
-	//slidear ner player 3 och player 4 knappen när player 2 knappen är klickad
+	/**
+	 * Makes 3 player choice and 4 player choice slide down 
+	 * when 2 player choice is clicked
+	 * @param evt
+	 */
 	public void AnimationSlide(java.awt.event.ActionEvent evt)
 	{
 		AnimationClass slide = new AnimationClass();
@@ -65,7 +65,10 @@ public class Yatzy
 		AnimationClass button3 = new AnimationClass();
 		button3.jButtonYDown(323, 373, 15, 2, btn3PlayerButton);
 	}
-	//slidear tillbaka player2 knappens textfields och player3 knappen till deras ursprungs plats
+	/**
+	 * Makes 2 player choice slide back 
+	 * @param evt
+	 */
 	public void AnimationSlideBack(java.awt.event.ActionEvent evt)
 	{
 		AnimationClass slideBack = new AnimationClass();
@@ -78,7 +81,10 @@ public class Yatzy
 		buttonBack3.jButtonYUp(373, 323, 5, 2, btn3PlayerButton);
 	}
 	
-	//slidear ner player3 knappens textfields och player 4 knappen
+	/**
+	 * Makes 3 player choice slide down
+	 * @param evt
+	 */
 	public void AnotherAnimationSlide(java.awt.event.ActionEvent evt)
 	{
 		AnimationClass slide3 = new AnimationClass();
@@ -93,7 +99,10 @@ public class Yatzy
 		button4.jButtonYDown(409, 512, 6, 1, btn4PlayerButton);
 		
 	}
-	//slidear tillbaka player3 knappens textfields och player 4 knappen till deras ursprungs plats
+	/**
+	 * Makes 3 player choice slide back
+	 * @param evt
+	 */
 	public void AnotherAnimationSlideBack(java.awt.event.ActionEvent evt)
 	{
 		AnimationClass slideBack3 = new AnimationClass();
@@ -107,7 +116,10 @@ public class Yatzy
 		AnimationClass button4Back = new AnimationClass();
 		button4Back.jButtonYUp(512, 409, 0, 1, btn4PlayerButton);
 	}	
-	//slidear ner player 4 knappens texfields
+	/**
+	 * Makes 4 player choice slide down
+	 * @param evt
+	 */
 	public void YetAnotherAnimationSlide(java.awt.event.ActionEvent evt)
 	{
 		AnimationClass slide6 = new AnimationClass();
@@ -121,7 +133,10 @@ public class Yatzy
 		AnimationClass play4 = new AnimationClass();
 		play4.jButtonYDown(409, 594, 3, 1, btnPlay4Button);
 	}
-	
+	/**
+	 * Makes 4 player choice slide back
+	 * @param evt
+	 */
 	public void YetAnotherAnimationSlideBack(java.awt.event.ActionEvent evt)
 	{
 		AnimationClass slideBack6 = new AnimationClass();
@@ -145,15 +160,13 @@ public class Yatzy
 	{
 		
 		initialize();
-		//gBoard.initGui();
-		
+
 	}
 	
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initializes the contents of the frame.
 	 */
-	//Spelets frame, dess storlek, kunna kryssa, layout och ikon
 	private void initialize() 
 	{
 		frame = new JFrame();
@@ -165,18 +178,17 @@ public class Yatzy
 		frame.getContentPane().setLayout(new CardLayout(0, 0));
 		frame.setVisible(true);
 		
-		//start panel
+		//startpanel
 		JPanel panelYatzy = new JPanel();
 		frame.getContentPane().add(panelYatzy, "name_989956785704721");
 		panelYatzy.setLayout(null);
-		// välj antal spelare panel
+		// Number of players panel
 		panelChoose = new JPanel();
 		frame.getContentPane().add(panelChoose, "name_989961417393328");
 		panelChoose.setLayout(null);
 		frame.setLocationRelativeTo(null);
-		//diceArray = new Dice[5];
 		
-		//vad knapp 2 gör när den blir klickad
+		//Button 2 actionevent
 		JButton btn2PlayerButton = new JButton("");
 		btn2PlayerButton.setMinimumSize(new Dimension(30, 9));
 		btn2PlayerButton.setMaximumSize(new Dimension(35, 9));
@@ -209,13 +221,12 @@ public class Yatzy
 				AnimationSlide(e);	
 			}
 		});
-		//Knappen till att välja 2 spelare, in klickad,musen över knappen och den den inte gör något
 		btn2PlayerButton.setPressedIcon(new ImageIcon("Resourses/2Players_Click.jpg"));
 		btn2PlayerButton.setRolloverIcon(new ImageIcon("Resourses/2Players_Hover.jpg"));
 		btn2PlayerButton.setIcon(new ImageIcon("Resourses/2Players_Default.jpg"));
 		btn2PlayerButton.setBounds(442, 235, 285, 25);
 		panelChoose.add(btn2PlayerButton);
-		//Vad knapp 3 gör
+		//Button 3 action event
 		btn3PlayerButton.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -243,8 +254,6 @@ public class Yatzy
 				AnotherAnimationSlide(e);
 			}
 		});
-		//Knappen till att välja 3 spelare, in klickad, musen över knappen och när den inte gör något
-		
 		btn3PlayerButton.setBorderPainted(false);
 		btn3PlayerButton.setPressedIcon(new ImageIcon("Resourses/3Players_Click.jpg"));
 		btn3PlayerButton.setRolloverIcon(new ImageIcon("Resourses/3Players_Hover.jpg"));
@@ -252,7 +261,7 @@ public class Yatzy
 		btn3PlayerButton.setBounds(442, 323, 285, 25);
 		panelChoose.add(btn3PlayerButton);
 		
-		//vad knapp 4 ska göra
+		//Button 4 action event
 		btn4PlayerButton.setBorderPainted(false);
 		btn4PlayerButton.addActionListener(new ActionListener() 
 		{
@@ -281,7 +290,7 @@ public class Yatzy
 				btnPlay4Button.setVisible(true);
 			}
 		});
-		//Knappen till att välja 4 spelare, in klickad, musen över knappen och när den inte gör något
+		//Button for 4 players
 		btn4PlayerButton.setPressedIcon(new ImageIcon("Resourses/4Players_Click.jpg"));
 		btn4PlayerButton.setRolloverIcon(new ImageIcon("Resourses/4Players_Hover.jpg"));
 		btn4PlayerButton.setIcon(new ImageIcon("Resourses/4Players_Default.jpg"));
@@ -290,7 +299,7 @@ public class Yatzy
 		
 		
 		
-		//play knapp som dyker upp när man klickar på 2 Players
+		//Play button, 2 players
 		btnPlay2Button.setBorderPainted(false);
 		btnPlay2Button.setRolloverIcon(new ImageIcon("Resourses/Play_Hover.jpg"));
 		btnPlay2Button.setPressedIcon(new ImageIcon("Resourses/Play_Click.jpg"));
@@ -299,7 +308,7 @@ public class Yatzy
 		panelChoose.add(btnPlay2Button);
 		btnPlay2Button.setVisible(false);
 		
-		//vad play knapp till 2 players gör
+		//Action event play button, 2 players
 		btnPlay2Button.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) 
@@ -320,9 +329,7 @@ public class Yatzy
                 
 			}
 		});
-		
-		//Skapar gameboard med 3 spelare
-		//vad play knappen till 3 players gör
+		//Action event play button, 3 players
 		btnPlay3Button.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) 
@@ -345,7 +352,7 @@ public class Yatzy
 			}
 		});
 		
-		//play knapp som dyker upp när man klickar på 3 Players
+		//Play button, 3 players
 		btnPlay3Button.setBorderPainted(false);
 		btnPlay3Button.setRolloverIcon(new ImageIcon("Resourses/Play_Hover.jpg"));
 		btnPlay3Button.setPressedIcon(new ImageIcon("Resourses/Play_Click.jpg"));
@@ -355,7 +362,6 @@ public class Yatzy
 		btnPlay3Button.setVisible(false);
 		
 		
-		//Skapar gameboard med 4 spelare
 		btnPlay4Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
@@ -376,7 +382,7 @@ public class Yatzy
 			}
 		});
 		
-		//Play knapp som dyker upp när man klickar på 4 Players
+		//Play button, 4 players
 		btnPlay4Button.setBorderPainted(false);
 		btnPlay4Button.setRolloverIcon(new ImageIcon("Resourses/Play_Hover.jpg"));
 		btnPlay4Button.setPressedIcon(new ImageIcon("Resourses/Play_Click.jpg"));
@@ -552,7 +558,7 @@ public class Yatzy
 		EnterPlayer44.setVisible(false);
 		
 		
-		//labeln som visar upp bilden när man väljer antal spelare
+		//Label for amount of player choice
 		JLabel background2 = new JLabel("");
 		background2.setIcon(new ImageIcon("Resourses/Choose.jpg"));
 		background2.setBounds(0, 0, 1178, 800);
@@ -560,7 +566,7 @@ public class Yatzy
 		
 		
 	
-		//Start knappen skickar användaren vidare till att välja antal spelare
+		//Start button
 		JButton btnStartButton = new JButton("");
 		btnStartButton.addActionListener(new ActionListener() 
 		{
@@ -571,7 +577,6 @@ public class Yatzy
 				
 			}
 		});
-		//Start knappen, hur den ser ut in klickad, när man har musen över den och när inget görs
 		btnStartButton.setBorderPainted(false);
 		btnStartButton.setFocusable(false);
 		btnStartButton.setBounds(528, 697, 110, 19);
@@ -580,7 +585,7 @@ public class Yatzy
 		btnStartButton.setRolloverIcon(new ImageIcon("Resourses/Start_Hover.jpg"));
 		btnStartButton.setIcon(new ImageIcon("Resourses/StartDefault.jpg"));
 		
-		//första labeln där spelets startsida bakgrund ligger
+		//First startscreen
 		JLabel background = new JLabel("");
 		background.setFocusCycleRoot(true);
 		background.setIgnoreRepaint(true);

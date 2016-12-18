@@ -1,7 +1,10 @@
 package com.jensen.model;
 
 	import java.util.ArrayList;
-
+	/**
+	 * The SetScoreByYahtzeeRules class contains the calculations for the score.
+	 *
+	 */
 	public class SetScoreByYahtzeeRules {
 
 		private ArrayList<Integer> ones = new ArrayList<>();
@@ -12,6 +15,11 @@ package com.jensen.model;
 		private ArrayList<Integer> sixes = new ArrayList<>();
 		private int[] diceArr;
 		private int selectedCategory;
+		/**
+		 * The method which sets the score
+		 * @param getDiceArray Gets the array with dices
+		 * @param category The category of the score
+		 */
 		public SetScoreByYahtzeeRules(int[] getDiceArray, int category) 
 		{
 			diceArr = new int[5];
@@ -51,7 +59,10 @@ package com.jensen.model;
 			}
 			
 		}
-		
+		/**
+		 * Method to set the upper score
+		 * @return returns the set value
+		 */
 		public int upperScoreSet()
 		{	
 			int setValue = 0;
@@ -73,136 +84,10 @@ package com.jensen.model;
 			return setValue;
 		}
 		
-		public void scoreForOTTFFS()
-		{		
-			/*
-			if(selectedCategory == 1)
-			{	
-				if(diceArr[value] == 1)
-				{
-					setValue += diceArr[value];
-				}
-			}
-			
-			if(selectedCategory == 2)
-			{
-				if(diceArr[value] == 2)
-				{
-					setValue += diceArr[value];
-				}
-			}
-			
-			if(selectedCategory == 3)
-			{
-				if(diceArr[value] == 3)
-				{
-					setValue += diceArr[value];
-				}
-			}
-			
-			if(selectedCategory == 4)
-			{
-				if(diceArr[value] == 4)
-				{
-					setValue += diceArr[value];
-				}
-			}
-			
-			if(selectedCategory == 5)
-			{
-				if(diceArr[value] == 5)
-				{
-					setValue += diceArr[value];
-				}
-			}
-			
-			if(selectedCategory == 6)
-			{
-				if(diceArr[value] == 6)
-				{
-					setValue += diceArr[value];
-				}
-			}*/
-		}
-		
-	/*	
-		public int twos()
-		{
-			int onesValue = 0;
-			
-			for(int i=0;i<diceArr.length;i++)
-			{
-				if(diceArr[i] == 2)
-				{
-					onesValue+=diceArr[i];
-				}
-			}
-		
-			return onesValue;
-		}
-		
-		public int threes()
-		{
-			int onesValue = 0;
-			
-			for(int i=0;i<diceArr.length;i++)
-			{
-				if(diceArr[i] == 3)
-				{
-					onesValue+=diceArr[i];
-				}
-			}
-		
-			return onesValue;
-		}
-		
-		public int fours()
-		{
-			int onesValue = 0;
-			
-			for(int i=0;i<diceArr.length;i++)
-			{
-				if(diceArr[i] == 4)
-				{
-					onesValue+=diceArr[i];
-				}
-			}
-		
-			return onesValue;
-		}
-		
-		public int fives()
-		{
-			int onesValue = 0;
-			
-			for(int i=0;i<diceArr.length;i++)
-			{
-				if(diceArr[i] == 5)
-				{
-					onesValue+=diceArr[i];
-				}
-			}
-		
-			return onesValue;
-		}
-		
-		public int sixes()
-		{
-			int onesValue = 0;
-			
-			for(int i=0;i<diceArr.length;i++)
-			{
-				if(diceArr[i] == 6)
-				{
-					onesValue+=diceArr[i];
-				}
-			}
-		
-			return onesValue;
-		}
-		*/
-		
-		
+		/**
+		 * Score calculation for pair
+		 * @return the value of the dice
+		 */
 		public int pair()
 		{
 			int returnScore = 0;
@@ -237,6 +122,10 @@ package com.jensen.model;
 			return returnScore;
 		}
 		
+		/**
+		 * Score calculation for two pair
+		 * @return the value of the dice
+		 */
 		public int twoPair()
 		{
 			int returnScore = 0;
@@ -294,7 +183,10 @@ package com.jensen.model;
 
 			return returnScore;
 		}
-		
+		/**
+		 * Score calculation for three of a kind
+		 * @return the value of the dice
+		 */
 		public int threeOfKind()
 		{
 			//int checkValue = 0;
@@ -330,13 +222,13 @@ package com.jensen.model;
 		
 			return returnScore;
 		}
-		
+		/**
+		 * Score calculation for four of a kind
+		 * @return the value of the dice
+		 */
 		public int fourOfKind()
-		{
-			//int checkValue = 0;
+		{	
 			int returnScore = 0;
-			/*if(specialCatagory())
-			{*/
 				if(ones.size() >= 4)
 				{
 					returnScore = 4;
@@ -361,11 +253,13 @@ package com.jensen.model;
 				{
 					returnScore = 24;
 				}
-			/*}*/
 		
 			return returnScore;
 		}
-		
+		/**
+		 * Score calculation for full house
+		 * @return the value of the dice
+		 */
 		public int fullHouse()
 		{
 			int returnScore=0;
@@ -379,7 +273,10 @@ package com.jensen.model;
 			
 			return returnScore;
 		}
-		
+		/**
+		 * Score calculation for small straight
+		 * @return the value of the dice
+		 */
 		public int smallStraight()
 		{
 			int returnScore=0;
@@ -389,8 +286,11 @@ package com.jensen.model;
 			}
 			
 			return returnScore;
-		}
-		
+		}				
+		/**
+		 * Score calculation for large straight
+		 * @return the value of the dice
+		 */
 		public int largeStraight()
 		{
 			int returnScore=0;
@@ -401,7 +301,11 @@ package com.jensen.model;
 			
 			return returnScore;
 		}
-		
+				
+		/**
+		 * Score calculation for yahtzee
+		 * @return the value of the dice
+		 */
 		public int yahtzee()
 		{
 			int returnScore=0;
@@ -412,7 +316,10 @@ package com.jensen.model;
 			
 			return returnScore;
 		}
-		
+		/**
+		 * Score calculation chance
+		 * @return the value of the dice
+		 */
 		public int chance()
 		{
 			int returnScore=0;
@@ -422,9 +329,11 @@ package com.jensen.model;
 			}
 			return returnScore;
 		}
-		
+		/**
+		 * Checks for combinations: Full house, yahtzee, small straight and large straight
+		 * @return if the dice contains the valid numbers, true or false
+		 */
 		private boolean specialCatagory() {
-			// TODO Auto-generated method stub
 			boolean isTrue = false;
 					
 			
@@ -445,17 +354,6 @@ package com.jensen.model;
 				{
 					isTrue = true;
 				}
-				/*else if(twos.size() >= 1 && threes.size() >= 1 && fours.size() >= 1 && fives.size() >= 1)
-				{
-					isTrue = true;
-				}
-				else 
-				{
-					if(threes.size() >= 1 && fours.size() >= 1 && fives.size() >= 1 && sixes.size() >= 1)
-					{
-						isTrue = true;
-					}
-				}*/
 			}
 			
 			if(selectedCategory == 15)
