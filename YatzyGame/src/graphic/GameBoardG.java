@@ -16,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -28,9 +29,8 @@ import com.jensen.model.SetScoreByYahtzeeRules;
 /**
  * 
  * GboardG contains the gameboard and player
- * 
  */
-public class GameBoardG implements MouseListener
+public class GameBoardG implements MouseListener, ConstantForYatzyGame
 {
 	private DefaultTableModel tableModel;
 	private int playerCount = 1;
@@ -305,8 +305,7 @@ public class GameBoardG implements MouseListener
 		
 		
 		
-		getCurrentPlayer = playerName[0]+"'S TURN"; 
-		textField.setText(getCurrentPlayer);
+		showCurrentPlayer(playerCount);
 		
 		JButton infoButton = new JButton("");
 		infoButton.setBorderPainted(false);
@@ -366,13 +365,14 @@ public class GameBoardG implements MouseListener
 		table.setRowHeight(23);
 		table.setFont(new Font("OCR A Extended", Font.PLAIN, 15));
 		table.setEnabled(false);
-		String temValue = "?";
+		
+		String tempValue = "?";
 		for(int i = 1; i <= playerAmount; i++)
 		{
-			table.setValueAt(temValue, 6, i);
-			table.setValueAt(temValue, 7, i);
-			table.setValueAt(temValue, 17, i);
-			table.setValueAt(temValue, 18, i);
+			table.setValueAt(tempValue, UPPER_SCORE-1, i);
+			table.setValueAt(tempValue, UPPER_BONUS-1, i);
+			table.setValueAt(tempValue, LOWER_SCORE-1, i);
+			table.setValueAt(tempValue, TOTAL-1, i);
 		}
 		
 		
@@ -415,6 +415,16 @@ public class GameBoardG implements MouseListener
 		checkBox5.setEnabled(true);
 		
 	}
+	/**
+	 * Shows current player
+	 * @param count current player
+	 */
+	private void showCurrentPlayer(int count){
+		getCurrentPlayer = playerName[count-1]+"'S turn";
+		textField.setText(getCurrentPlayer);
+	}
+	
+	
 	/**
 	 * Creates the gameboard
 	 */
@@ -504,7 +514,6 @@ public class GameBoardG implements MouseListener
 	void resetDice(int _value)
 	{
 		value= diceArray[_value].getDice();
-		//diceButton[_value].setText(String.valueOf(value));;
 		diceButton[_value].setIcon(new ImageIcon("Resourses/diceQ.jpg"));
 		diceValueHolder[_value]= value;
 		
@@ -521,7 +530,7 @@ public class GameBoardG implements MouseListener
 		if(e.getSource()==table)
 		{
 			int value=0,getTableRow=0;
-			getTableRow = table.getSelectedRow();
+			getTableRow = table.getSelectedRow()+1;
 			SetScoreByYahtzeeRules setScore = new SetScoreByYahtzeeRules(diceValueHolder,getTableRow);
 			
 			for(int i=0; i<6;i++)
@@ -532,40 +541,40 @@ public class GameBoardG implements MouseListener
 				}
 			}
 			
-			if(getTableRow == 8)
+			if(getTableRow == PAIR)
 			{
 				value = setScore.pair();
 			}
-			if(getTableRow == 9)
+			if(getTableRow == TWO_PAIR)
 			{
 				value = setScore.twoPair();
 			}
 			
-			if(getTableRow == 10)
+			if(getTableRow == THREE_OF_KIND)
 			{
 				value = setScore.threeOfKind();
 			}
-			if(getTableRow == 11)
+			if(getTableRow == FOUR_OF_KIND)
 			{
 				value = setScore.fourOfKind();
 			}
-			if(getTableRow == 12)
+			if(getTableRow == FULL_HOUSE)
 			{
 				value = setScore.fullHouse();
 			}
-			if(getTableRow == 13)
+			if(getTableRow == SMALL_STRAIGHT)
 			{
 				value = setScore.smallStraight();
 			}
-			if(getTableRow == 14)
+			if(getTableRow == LARGE_STRAIGHT)
 			{
 				value = setScore.largeStraight();
 			}
-			if(getTableRow == 15)
+			if(getTableRow == CHANCE)
 			{
 				value = setScore.chance();
 			}
-			if(getTableRow == 16)
+			if(getTableRow == YAHTZEE)
 			{
 				value = setScore.yahtzee();
 			}
@@ -573,7 +582,9 @@ public class GameBoardG implements MouseListener
 			
 			if(isRowEmpty(getTableRow))
 			{
-				table.setValueAt(value, getTableRow, currentPlayer);
+				
+				table.setValueAt(value, getTableRow-1, currentPlayer);
+				
 				
 				for(int i=0;i<diceArray.length;i++)
 				{
@@ -598,42 +609,40 @@ public class GameBoardG implements MouseListener
 				table.setEnabled(false);
 				
 				
-				getCurrentPlayer = playerName[playerCount-1]+"'S TURN"; 
-				textField.setText(getCurrentPlayer);
-							
+				showCurrentPlayer(playerCount);			
 			}
 			
 			
 			int upperScore = 0;
 			int bonusPoint = 0;
-			if(!isRowEmpty(0) && !isRowEmpty(1) && !isRowEmpty(2) && !isRowEmpty(3) && !isRowEmpty(4) && !isRowEmpty(5))
+			if(!isRowEmpty(ONES) && !isRowEmpty(TWOS) && !isRowEmpty(THREES) && !isRowEmpty(FOURS) && !isRowEmpty(FIVES) && !isRowEmpty(SIXES))
 			{
 				upperScore = getUpperScore();
-				table.setValueAt(upperScore, 6, currentPlayer);
+				table.setValueAt(upperScore, UPPER_SCORE-1, currentPlayer);
 				if(upperScore >= 63)
 				{
 					bonusPoint = 50;
-					table.setValueAt(bonusPoint, 7, currentPlayer);
+					table.setValueAt(bonusPoint, UPPER_BONUS-1, currentPlayer);
 				}
 				else
 				{
 					bonusPoint = 0;
-					table.setValueAt(bonusPoint, 7, currentPlayer);
+					table.setValueAt(bonusPoint, UPPER_BONUS-1, currentPlayer);
 				}
 			}
 			
 			
 			int lowerScore = 0;
-			if(!isRowEmpty(8) && !isRowEmpty(9) && !isRowEmpty(10) && !isRowEmpty(11) && !isRowEmpty(12) && !isRowEmpty(13) && !isRowEmpty(14)&&!isRowEmpty(15)&&!isRowEmpty(16))
+			if(!isRowEmpty(PAIR) && !isRowEmpty(TWO_PAIR) && !isRowEmpty(THREE_OF_KIND) && !isRowEmpty(FOUR_OF_KIND) && !isRowEmpty(FULL_HOUSE) && !isRowEmpty(SMALL_STRAIGHT) && !isRowEmpty(LARGE_STRAIGHT)&&!isRowEmpty(CHANCE)&&!isRowEmpty(YAHTZEE))
 			{
 				lowerScore = getLowerScore();
-				table.setValueAt(lowerScore, 17, currentPlayer);
+				table.setValueAt(lowerScore, LOWER_SCORE-1, currentPlayer);
 			}
 			
-			if(!isRowEmpty(0) && !isRowEmpty(1) && !isRowEmpty(2) && !isRowEmpty(3) && !isRowEmpty(4) && !isRowEmpty(5) && !isRowEmpty(8) && !isRowEmpty(9) && !isRowEmpty(10) && !isRowEmpty(11) && !isRowEmpty(12) && !isRowEmpty(13) && !isRowEmpty(14) && !isRowEmpty(15) && !isRowEmpty(16))
+			if(!isRowEmpty(ONES) && !isRowEmpty(TWOS) && !isRowEmpty(THREES) && !isRowEmpty(FOURS) && !isRowEmpty(FIVES) && !isRowEmpty(SIXES) && !isRowEmpty(PAIR) && !isRowEmpty(TWO_PAIR) && !isRowEmpty(THREE_OF_KIND) && !isRowEmpty(FOUR_OF_KIND) && !isRowEmpty(FULL_HOUSE) && !isRowEmpty(SMALL_STRAIGHT) && !isRowEmpty(LARGE_STRAIGHT) && !isRowEmpty(CHANCE) && !isRowEmpty(YAHTZEE))
 			{
 				int total = bonusPoint + lowerScore + upperScore;
-				table.setValueAt(total, 18, currentPlayer);
+				table.setValueAt(total, TOTAL-1, currentPlayer);
 				
 				int[] playerPoint;
 				String[] temp;
@@ -648,7 +657,7 @@ public class GameBoardG implements MouseListener
 						
 						for(int i = 0; i < playerTableCounter; i++)
 						{
-							temp[i] = table.getValueAt(18, i+1).toString();
+							temp[i] = table.getValueAt(TOTAL-1, i+1).toString();
 							playerPoint[i] = Integer.parseInt(temp[i]);
 						}
 						
@@ -674,7 +683,7 @@ public class GameBoardG implements MouseListener
 						
 						for(int i = 0; i < playerTableCounter; i++)
 						{
-							temp[i] = table.getValueAt(18, i+1).toString();
+							temp[i] = table.getValueAt(TOTAL-1, i+1).toString();
 							playerPoint[i] = Integer.parseInt(temp[i]);
 						}
 						
@@ -700,7 +709,7 @@ public class GameBoardG implements MouseListener
 						
 						for(int i = 0; i < playerTableCounter; i++)
 						{
-							temp[i] = table.getValueAt(18, i+1).toString();
+							temp[i] = table.getValueAt(TOTAL-1, i+1).toString();
 							playerPoint[i] = Integer.parseInt(temp[i]);
 						}
 						
@@ -761,7 +770,6 @@ public class GameBoardG implements MouseListener
 	 * Gets and calculates upper score
 	 * @return upper score value
 	 */
-
 	private int getUpperScore() 
 	{
 		int returnValue = 0,newValue = 0;
@@ -787,15 +795,25 @@ public class GameBoardG implements MouseListener
 	{
 		boolean isTrue = false;
 		String getValueInRow = "";
-		getValueInRow = table.getValueAt(currentClickedRow, currentPlayer).toString();
 		
-		if(getValueInRow == "")
+		try
 		{
-			isTrue = true;
+			getValueInRow = table.getValueAt(currentClickedRow-1, currentPlayer).toString();
+			
+			if(getValueInRow == "")
+			{
+				isTrue = true;
+			}
+			else
+			{
+				isTrue = false;
+			}
+		
 		}
-		else
+		catch (Exception e)
 		{
-			isTrue = false;
+			JOptionPane opPane = new JOptionPane();
+			opPane.showMessageDialog(null,"Roll the dice first");
 		}
 		
 		return isTrue;

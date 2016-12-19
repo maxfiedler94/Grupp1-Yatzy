@@ -1,11 +1,13 @@
 package com.jensen.model;
 
 	import java.util.ArrayList;
+
+import graphic.ConstantForYatzyGame;
 	/**
 	 * The SetScoreByYahtzeeRules class contains the calculations for the score.
 	 *
 	 */
-	public class SetScoreByYahtzeeRules {
+	public class SetScoreByYahtzeeRules implements ConstantForYatzyGame {
 
 		private ArrayList<Integer> ones = new ArrayList<>();
 		private ArrayList<Integer> twos = new ArrayList<>();
@@ -27,7 +29,7 @@ package com.jensen.model;
 			{
 				diceArr[i] = getDiceArray[i];
 			}
-			selectedCategory = category+1;
+			selectedCategory = category;
 			
 			
 			for(int i=0;i<diceArr.length;i++)
@@ -189,10 +191,8 @@ package com.jensen.model;
 		 */
 		public int threeOfKind()
 		{
-			//int checkValue = 0;
 			int returnScore = 0;
-			/*if(specialCatagory())
-			{*/
+
 				if(ones.size() >= 3)
 				{
 					returnScore = 3;
@@ -218,7 +218,6 @@ package com.jensen.model;
 					returnScore = 18;
 				}
 					
-			//}
 		
 			return returnScore;
 		}
@@ -337,7 +336,7 @@ package com.jensen.model;
 			boolean isTrue = false;
 					
 			
-			if(selectedCategory == 13)
+			if(selectedCategory == FULL_HOUSE)
 			{
 				if(ones.size() == 3 || twos.size() == 3 || threes.size() == 3 || fours.size() == 3 || fives.size() == 3 || sixes.size() == 3)
 				{
@@ -348,7 +347,7 @@ package com.jensen.model;
 				}
 			}
 			
-			if(selectedCategory == 14)
+			if(selectedCategory == SMALL_STRAIGHT)
 			{
 				if(ones.size() == 1 && twos.size() == 1 && threes.size() == 1 && fours.size() == 1 && fives.size() == 1)
 				{
@@ -356,7 +355,7 @@ package com.jensen.model;
 				}
 			}
 			
-			if(selectedCategory == 15)
+			if(selectedCategory == LARGE_STRAIGHT)
 			{
 				if(twos.size() == 1 && threes.size() == 1 && fours.size() == 1 && fives.size() == 1 && sixes.size() == 1)
 				{
@@ -364,7 +363,7 @@ package com.jensen.model;
 				}
 			}
 			
-			if(selectedCategory == 17)
+			if(selectedCategory == YAHTZEE)
 			{
 				if(ones.size() == 5 || twos.size() == 5 || threes.size() == 5 || fours.size() == 5 || fives.size() == 5 || sixes.size() == 5)
 				{
