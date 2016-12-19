@@ -56,10 +56,9 @@ public class GameBoardG implements MouseListener
 	private String[] playerName;
 	private JPanel panel;
 	private String getCurrentPlayer = "";
+	private JButton exitButton;
 	int playerTableCounter = 0;
 	
-	//private JScrollPane scrollPane;
-	//private String player1, player2;
 	
 	private JCheckBox checkBox,checkBox2,checkBox3,checkBox4,checkBox5;
 	int counter = 0;
@@ -339,6 +338,23 @@ public class GameBoardG implements MouseListener
 				infoFrame.setVisible(true);
 		    }
 		});
+		//Exit button
+		exitButton = new JButton("");
+		exitButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		exitButton.setPressedIcon(new ImageIcon("Resourses/exitClick.jpg"));
+		exitButton.setRolloverIcon(new ImageIcon("Resourses/exitHover.jpg"));
+		exitButton.setIcon(new ImageIcon("Resourses/exitDefault.jpg"));
+		exitButton.setBounds(590, 630, 120, 30);
+		exitButton.setBorderPainted(false);
+		exitButton.setVisible(false);
+		panelGame.add(exitButton);
+		exitButton.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				System.exit(0);
+			}
+		});
 		
 		tableModel = new DefaultTableModel(data1,col);
 		table = new JTable(tableModel);
@@ -380,7 +396,6 @@ public class GameBoardG implements MouseListener
 	 * Disables checkboxes
 	 */
 	private void setCheckBoxToFalse() {
-		// TODO Auto-generated method stub
 		checkBox.setEnabled(false);
 		checkBox2.setEnabled(false);
 		checkBox3.setEnabled(false);
@@ -393,7 +408,6 @@ public class GameBoardG implements MouseListener
 	 * Enables checkboxes
 	 */
 	private void setCheckBoxToTrue() {
-		// TODO Auto-generated method stub
 		checkBox.setEnabled(true);
 		checkBox2.setEnabled(true);
 		checkBox3.setEnabled(true);
@@ -711,6 +725,7 @@ public class GameBoardG implements MouseListener
 					
 					rollButton.setEnabled(false);
 					table.setEnabled(false);
+					exitButton.setVisible(true);
 					setCheckBoxToFalse();
 					
 					
