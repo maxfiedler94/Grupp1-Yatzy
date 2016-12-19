@@ -700,6 +700,10 @@ public class GameBoardG implements MouseListener, ConstantForYatzyGame
 						{
 							textField.setText(playerName[0]+" IS THE WINNER");
 						}
+						else if(playerPoint[0] == playerPoint[1] && playerPoint[1] == playerPoint[2])
+						{
+							textField.setText("IT'S A DRAW!");
+						}
 						else
 						{
 							textField.setText(playerName[2]+" IS THE WINNER");
@@ -729,6 +733,10 @@ public class GameBoardG implements MouseListener, ConstantForYatzyGame
 						else if(playerPoint[2] > playerPoint[0] && playerPoint[2] > playerPoint[1] && playerPoint[2] > playerPoint[3])
 						{
 							textField.setText(playerName[2]+" IS THE WINNER");
+						}
+						else if(playerPoint[0] == playerPoint[1] && playerPoint[1] == playerPoint[2] && playerPoint[2] == playerPoint[3])
+						{
+							textField.setText("IT'S A DRAW!");
 						}
 						else
 						{
