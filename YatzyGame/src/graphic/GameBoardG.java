@@ -355,7 +355,12 @@ public class GameBoardG implements MouseListener, ConstantForYatzyGame
 		});
 		
 		tableModel = new DefaultTableModel(data1,col);
-		table = new JTable(tableModel);
+		table = new JTable(tableModel){
+			public boolean isCellEditable(int row, int column)
+			{
+				return false;
+			}
+		};
 		table.setCellSelectionEnabled(false);
 		table.getTableHeader().setReorderingAllowed(false);
 		table.setPreferredScrollableViewportSize(new Dimension(720, 720));
