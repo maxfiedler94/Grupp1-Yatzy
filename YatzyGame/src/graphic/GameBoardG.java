@@ -64,7 +64,6 @@ public class GameBoardG implements MouseListener, ConstantForYatzyGame
 	int counter = 0;
 	
 	/**
-	 * @wbp.parser.constructor
 	 * Constructor
 	 */
 	public GameBoardG(String[] players, int playerCount)
